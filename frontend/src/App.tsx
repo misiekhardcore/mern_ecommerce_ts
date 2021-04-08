@@ -1,17 +1,33 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
+import { Navbar } from "./components/Navbar";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+import { ProductPage } from "./pages/ProductPage";
+import { CartPage } from "./pages/CartPage";
 
 const App: React.FC<{}> = () => {
   return (
-    <div className="App">
+    <Router>
       {/* Navbar */}
+      <Navbar />
       {/* SideDrawer */}
       {/* Backdrop */}
-      {/* HomeScreen */}
-      {/* ProductScreen */}
-      {/* CartScreen */}
-      Hello
-    </div>
+      <main>
+        <Switch>
+          {/* HomeScreen */}
+          <Route exact path="/" component={HomePage} />
+          {/* ProductScreen */}
+          <Route exact path="/product/:id" component={ProductPage} />
+          {/* CartScreen */}
+          <Route exact path="/cart" component={CartPage} />
+        </Switch>
+      </main>
+    </Router>
   );
 };
 
