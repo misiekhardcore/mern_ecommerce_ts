@@ -1,7 +1,10 @@
 import React from "react";
+import "./Backdrop.scss";
 
-interface BackdropProps {}
+interface BackdropProps {
+  toggle: boolean;
+}
 
-export const Backdrop: React.FC<BackdropProps> = () => {
-  return <div className=""></div>;
+export const Backdrop: React.FC<BackdropProps> = ({ toggle }) => {
+  return <div className={`backdrop ${toggle && "active"}`}></div>;
 };

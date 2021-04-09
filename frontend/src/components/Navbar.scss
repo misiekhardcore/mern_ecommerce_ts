@@ -10,6 +10,7 @@
   background-color: rgb(43, 41, 61);
   color: $white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
 
   .navbar__logo {
     padding: 1rem;
@@ -74,17 +75,19 @@
       &::before {
         top: -8px;
       }
+    }
 
-      &.active {
-        // transform: scale(0);
+    &.active {
+      .hamburger__icon {
+        background-color: rgba(0, 0, 0, 0);
       }
 
-      &::before.active {
-        transform: rotate(45deg);
+      .hamburger__icon::before {
+        transform: rotate(45deg) translate(6px, 6px);
       }
 
-      &::after.active {
-        transform: rotate(-45deg);
+      .hamburger__icon::after {
+        transform: rotate(-45deg) translate(6px, -6px);
       }
     }
   }
@@ -95,6 +98,17 @@
     }
     .hamburger {
       display: block;
+    }
+  }
+
+  @media (max-width: 414px) {
+    font-size: 10px;
+    .hamburger {
+      .hamburger__icon,
+      .hamburger__icon::before,
+      .hamburger__icon::after {
+        width: 24px;
+      }
     }
   }
 }

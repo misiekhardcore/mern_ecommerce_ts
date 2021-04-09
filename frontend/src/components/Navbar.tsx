@@ -3,9 +3,12 @@ import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 
-interface NavbarProps {}
+interface NavbarProps {
+  toggle: boolean;
+  setToggle: (toggle: any) => void;
+}
 
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC<NavbarProps> = ({ toggle, setToggle }) => {
   return (
     <nav className="navbar">
       {/* logo */}
@@ -30,7 +33,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
         </li>
       </ul>
       {/* hamburger */}
-      <div className="hamburger">
+      <div
+        onClick={() => setToggle(!toggle)}
+        className={`hamburger ${toggle && "active"}`}
+      >
         <span className="hamburger__icon"></span>
       </div>
     </nav>
