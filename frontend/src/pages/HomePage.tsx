@@ -1,13 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
-export interface IProduct {
-  name: string;
-  description: string;
-  price: number;
-  countInStock: number;
-  imageUrl: string;
-}
+import { IProduct } from "../types";
 
 interface HomePageProps {}
 
