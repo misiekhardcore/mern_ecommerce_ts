@@ -5,7 +5,7 @@ import { FiShoppingCart } from "react-icons/fi";
 
 interface NavbarProps {
   toggle: boolean;
-  setToggle: (toggle: any) => void;
+  setToggle: (value: React.SetStateAction<boolean>) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ toggle, setToggle }) => {
@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ toggle, setToggle }) => {
       </ul>
       {/* hamburger */}
       <div
-        onClick={() => setToggle(!toggle)}
+        onClick={() => setToggle((prev) => !prev)}
         className={`hamburger ${toggle && "active"}`}
       >
         <span className="hamburger__icon"></span>
