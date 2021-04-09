@@ -1,20 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Product } from "../components/Product";
 import { IProduct } from "../types";
+import "./HomePage.scss";
 
 interface HomePageProps {}
 
 const initialProducts: IProduct[] = [];
 
 export const HomePage: React.FC<HomePageProps> = () => {
-  const [products, setProducts]: [
-    IProduct[],
-    (products: IProduct[]) => void
-  ] = useState(initialProducts);
+  const [products, setProducts] = useState<IProduct[]>(initialProducts);
 
   useEffect(() => {
     axios
-      .get<IProduct[]>("http://172.22.89.171:4000/api/products", {
+      .get<IProduct[]>("http://localhost:4000/api/products", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -24,13 +23,13 @@ export const HomePage: React.FC<HomePageProps> = () => {
   }, []);
 
   return (
-    <div className="home">
-      Home
-      <ul>
+    <div className="homepage">
+      <h2 className="homepage__title">Latest Products</h2>
+      <div className="homepage__products">
         {products.map((product, idx) => (
-          <li key={idx}>{product.name}</li>
+          <Product product={product} key={idx} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
