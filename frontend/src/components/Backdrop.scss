@@ -9,8 +9,11 @@
   transition: background-color 0.3s ease-in-out;
 
   &.active {
-    display: block;
     transform: translateX(0);
     background-color: rgba(0, 0, 0, 0.5);
+
+    @media (min-width: 800px) {
+      display: none;
+    }
   }
 }
