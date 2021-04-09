@@ -12,19 +12,13 @@ const App: React.FC<{}> = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   return (
     <Router>
-      {/* Navbar */}
       <Navbar toggle={toggle} setToggle={setToggle} />
-      {/* SideDrawer */}
-      <SideDrawer toggle={toggle} />
-      {/* Backdrop */}
-      <Backdrop toggle={toggle} />
+      <SideDrawer toggle={toggle} setToggle={setToggle} />
+      <Backdrop toggle={toggle} setToggle={() => setToggle(false)} />
       <main>
         <Switch>
-          {/* HomeScreen */}
           <Route exact path="/" component={HomePage} />
-          {/* ProductScreen */}
           <Route exact path="/product/:id" component={ProductPage} />
-          {/* CartScreen */}
           <Route exact path="/cart" component={CartPage} />
         </Switch>
       </main>
