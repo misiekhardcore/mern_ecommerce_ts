@@ -13,5 +13,50 @@
 
   &.active {
     transform: translateX(0);
+
+    @media (min-width: 800px) {
+      display: none;
+    }
+  }
+
+  .sidedrawer__links {
+    list-style: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .sidedrawer__link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      width: 100%;
+      transition: all 0.3s ease-in-out;
+
+      &:hover,
+      &:focus {
+        background-color: gray;
+        color: white;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+        font-size: 2rem;
+        gap: 8px;
+      }
+    }
+    .cartlogo__badge {
+      background-color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
   }
 }
