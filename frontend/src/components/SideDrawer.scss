@@ -1,4 +1,5 @@
 @import "../colors";
+@import "../effects";
 
 .sidedrawer {
   width: 70%;
@@ -9,7 +10,7 @@
   left: 0;
   z-index: 200;
   transform: translateX(-100%);
-  transition: all 0.3s ease-in-out;
+  transition: $default-transition;
 
   &.active {
     transform: translateX(0);
@@ -33,7 +34,7 @@
       align-items: center;
       flex-grow: 1;
       width: 100%;
-      transition: all 0.3s ease-in-out;
+      transition: $default-transition;
 
       &:hover,
       &:focus {
