@@ -1,2 +1,29 @@
 $white: #f4f4f4;
 $black: #171717;
+
+@function color($color, $value) {
+  $ans: $color;
+  @if ($value > 50) {
+    $ans: lighten($color, $value - 50);
+  }
+  @if ($value<50) {
+    $ans: darken($color, 50-$value);
+  }
+  @return $ans;
+}
+
+@function danger($amount) {
+  @return color(red, $amount);
+}
+
+@function success($amount) {
+  @return color(green, $amount);
+}
+
+@function info($amount) {
+  @return color(blue, $amount);
+}
+
+@function warning($amount) {
+  @return color(yellow, $amount);
+}
