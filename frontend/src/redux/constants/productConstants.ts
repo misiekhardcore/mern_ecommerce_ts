@@ -1,0 +1,8 @@
+export const GET_PRODUCTS_REQUEST: string = "GET_PRODUCTS_REQUEST";
+export const GET_PRODUCTS_SUCCESS: string = "GET_PRODUCTS_SUCCESS";
+export const GET_PRODUCTS_FAIL: string = "GET_PRODUCTS_FAIL";
+
+export const GET_PRODUCT_REQUEST: string = "GET_PRODUCT_REQUEST";
+export const GET_PRODUCT_SUCCESS: string = "GET_PRODUCT_SUCCESS";
+export const GET_PRODUCT_FAIL: string = "GET_PRODUCT_FAIL";
+export const GET_PRODUCT_RESET: string = "GET_PRODUCT_RESET";
