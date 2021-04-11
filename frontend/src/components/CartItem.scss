@@ -1,0 +1,67 @@
+@import "../colors";
+
+.cartitem {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  margin-bottom: 1rem;
+  background-color: white;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4rem;
+
+  .cartitem__image {
+    object-fit: cover;
+  }
+
+  .cartitem__name {
+    font-weight: bold;
+  }
+
+  .cartitem__button {
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+    border: none;
+    display: block;
+    font-size: 2rem;
+    justify-self: center;
+    line-height: 0;
+    color: danger(50);
+
+    &:hover,
+    &:focus {
+      color: danger(30);
+    }
+
+    @media (max-width: 800px) {
+      & {
+        font-size: 1.5rem;
+      }
+    }
+    @media (max-width: 500px) {
+      & {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .cartitem__select {
+    padding: 0.8rem;
+    border-radius: 4px;
+  }
+}
+ 
+@media (max-width: 800px) {
+  .cartitem{
+    grid-template-columns: 1fr 2fr 1fr auto auto;
+  }
+  .cartitem__name,
+  .cartitem__price {
+    font-size: 0.8rem;
+  }
+
+  .cartitem__select {
+    padding: 0.5rem;
+  }
+}
