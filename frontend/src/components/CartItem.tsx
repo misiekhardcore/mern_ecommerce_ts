@@ -4,6 +4,8 @@ import "./CartItem.scss";
 import { ItemCountSelect } from "./ItemCountSelect";
 import { BsXCircle } from "react-icons/bs";
 import { ICartItem } from "../redux/reducers/cartReducer";
+import { useDispatch } from "react-redux";
+import { removeFromCart, updateCart } from "../redux/actions/cartActions";
 
 interface CartItemProps {
   item: ICartItem;
@@ -12,7 +14,18 @@ interface CartItemProps {
 export const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const { product, amount } = item;
   const { name, imageUrl, _id, countInStock, price } = product;
-  const [qty, setQty] = useState<number>(0);
+  const [qty, setQty] = useState<number>(item.amount);
+  const dispatch = useDispatch();
+
+  const removeFromCartHandler = () => {
+    dispatch(removeFromCart(item.product._id));
+  };
+
+  const updateItemhandler = (x: number) => {
+    setQty(x);
+    dispatch(updateCart(_id, x));
+  };
+
   return (
     <div className="cartitem">
       <div className="cartitem__image">
@@ -24,12 +37,16 @@ export const CartItem: React.FC<CartItemProps> = ({ item }) => {
       <p className="cartitem__price">${price}</p>
       <ItemCountSelect
         value={qty}
-        setValue={setQty}
+        setValue={updateItemhandler}
         className="cartitem__select"
         count={countInStock}
         current={amount}
       />
-      <button type="button" className="cartitem__button">
+      <button
+        onClick={removeFromCartHandler}
+        type="button"
+        className="cartitem__button"
+      >
         <BsXCircle />
       </button>
     </div>
