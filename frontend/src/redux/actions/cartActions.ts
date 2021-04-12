@@ -8,7 +8,7 @@ export const addToCart = (id: string, amount: number) => async (
   getState: GetState
 ) => {
   const { data } = await axios.get<IProduct>(
-    `http://172.22.89.171:4000/api/products/${id}`
+    `http://127.0.0.1:4000/api/products/${id}`
   );
 
   dispatch({
@@ -20,6 +20,20 @@ export const addToCart = (id: string, amount: number) => async (
     "cart",
     JSON.stringify(getState().cartReducer.cartItems)
   );
+};
+
+export const updateCart = (id: string, amount: number) => (
+  dispatch: AppDispatch,
+  getState: GetState
+) => {
+  const product = getState().cartReducer.cartItems.find(
+    (x) => x.product._id === id
+  );
+  if (product)
+    dispatch({
+      type: actionTypes.UPDATE_CART,
+      payload: { ...product, amount },
+    });
 };
 
 export const removeFromCart = (id: string) => (

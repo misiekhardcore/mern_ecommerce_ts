@@ -32,7 +32,7 @@ export const cartReducer = (
             p.product._id === existingProduct.product._id
               ? {
                   ...(product as ICartItem),
-                  amount: p.amount + existingProduct.amount,
+                  amount: p.amount + (product as ICartItem).amount,
                 }
               : p
           ),
@@ -47,6 +47,16 @@ export const cartReducer = (
         ...state,
         cartItems: state.cartItems.filter(
           (p: ICartItem) => p.product._id !== action.payload
+        ),
+      };
+    case actionTypes.UPDATE_CART:
+      const product1 = action.payload as ICartItem;
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) =>
+          item.product._id === product1.product._id
+            ? { ...item, amount: product1.amount }
+            : item
         ),
       };
     case actionTypes.RESET_CART:
