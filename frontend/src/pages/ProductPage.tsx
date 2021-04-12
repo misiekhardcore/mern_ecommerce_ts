@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { RouteComponentProps, useParams } from "react-router";
 import { ItemCountSelect } from "../components/ItemCountSelect";
 import { useProduct } from "../hooks/useProducts";
 import { addToCart } from "../redux/actions/cartActions";
 import { IProduct } from "../types";
 import "./ProductPage.scss";
 
-interface ProductPageProps {}
+interface ProductPageProps extends RouteComponentProps {}
 
 const initialProduct: IProduct = {
   _id: "0",
@@ -17,19 +18,25 @@ const initialProduct: IProduct = {
   imageUrl: "",
 };
 
-export const ProductPage: React.FC<ProductPageProps> = () => {
-  const [qty, setQty] = useState<number>(0);
+export const ProductPage: React.FC<ProductPageProps> = ({ history }) => {
+  const [qty, setQty] = useState<number>(1);
   const { id } = useParams<{ id: string }>();
   const { product = initialProduct, loading, error } = useProduct(id);
+  const dispatch = useDispatch();
 
   const {
-    _id,
-    name,
-    countInStock,
-    description,
-    imageUrl,
-    price,
-  } = product as IProduct;
+    _id = "",
+    name = "",
+    countInStock = 0,
+    description = "",
+    imageUrl = "",
+    price = 0,
+  } = { ...product };
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(_id, qty));
+    history.push("/cart");
+  };
 
   return (
     <div className="productpage">
@@ -37,7 +44,7 @@ export const ProductPage: React.FC<ProductPageProps> = () => {
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
-      ) : (
+      ) : product ? (
         <>
           <div className="productpage__left">
             <div className="left__image">
@@ -52,11 +59,11 @@ export const ProductPage: React.FC<ProductPageProps> = () => {
           <div className="productpage__right">
             <div className="right__info">
               <p>
-                Price: <span>${price}</span>
+                Price: <span>${price * qty}</span>
               </p>
               <p>
                 Staus:
-                <span>
+                <span style={{ color: countInStock ? "green" : "red" }}>
                   {countInStock ? "In Stock" : "Not Available"}
                 </span>
               </p>
@@ -70,8 +77,9 @@ export const ProductPage: React.FC<ProductPageProps> = () => {
               </p>
               <p>
                 <button
+                  disabled={!countInStock}
                   type="button"
-                  onClick={async () => await addToCart(_id, qty)}
+                  onClick={addToCartHandler}
                 >
                   Add to Cart
                 </button>
@@ -79,7 +87,7 @@ export const ProductPage: React.FC<ProductPageProps> = () => {
             </div>
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 };
