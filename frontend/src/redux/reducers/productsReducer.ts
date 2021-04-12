@@ -42,13 +42,13 @@ export const getProductsReducer = (
 };
 
 export interface IProductState {
-  product: IProduct | {};
+  product: IProduct | null;
   loading: boolean;
   error: Error | null;
 }
 
 export const getProductReducer = (
-  state: IProductState = { product: {}, error: null, loading: false },
+  state: IProductState = { product: null, error: null, loading: false },
   action: PayloadAction<IProduct | Error>
 ): IProductState => {
   switch (action.type) {
@@ -72,7 +72,7 @@ export const getProductReducer = (
     case actionTypes.GET_PRODUCT_RESET:
       return {
         ...state,
-        product: {},
+        product: null,
       };
     default:
       return state;
