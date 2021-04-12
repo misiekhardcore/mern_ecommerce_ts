@@ -32,8 +32,8 @@ export const useProduct = (id: string): IProductState => {
   );
 
   useEffect(() => {
-    dispatch(getProductDetails(id));
-  }, [dispatch, id]);
+    if (product?.product?._id !== id) dispatch(getProductDetails(id));
+  }, [dispatch, id, product]);
 
   return product;
 };
