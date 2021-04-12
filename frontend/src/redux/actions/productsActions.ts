@@ -8,7 +8,7 @@ export const getProducts = () => async (dispatch: AppDispatch) => {
     dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST });
 
     const { data } = await axios.get<IProduct[]>(
-      "http://172.22.89.171:4000/api/products"
+      "http://127.0.0.1:4000/api/products"
     );
 
     dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, payload: data });
@@ -27,7 +27,7 @@ export const getProductDetails = (id: string) => async (
     dispatch({ type: actionTypes.GET_PRODUCT_REQUEST });
 
     const { data } = await axios.get<IProduct[]>(
-      `http://172.22.89.171:4000/api/products/${id}`
+      `http://127.0.0.1:4000/api/products/${id}`
     );
 
     dispatch({ type: actionTypes.GET_PRODUCT_SUCCESS, payload: data });
