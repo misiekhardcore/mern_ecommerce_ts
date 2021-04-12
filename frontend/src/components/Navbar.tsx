@@ -1,7 +1,11 @@
 import React from "react";
-import "./Navbar.scss";
-import { Link } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ICartItem } from "../redux/reducers/cartReducer";
+import { RootState } from "../redux/store";
+import { totalAmount } from "../utils/helpers";
+import "./Navbar.scss";
 
 interface NavbarProps {
   toggle: boolean;
@@ -9,6 +13,12 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ toggle, setToggle }) => {
+  const cart = useSelector<RootState, ICartItem[]>(
+    (state) => state.cartReducer.cartItems
+  );
+
+  const itemsCount = totalAmount(cart);
+
   return (
     <nav className="navbar">
       {/* logo */}
@@ -22,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ toggle, setToggle }) => {
         <li className="navbar__link">
           <Link to="/cart">
             <FiShoppingCart /> Cart
-            <span className="cartlogo__badge">9</span>
+            <span className="cartlogo__badge">{itemsCount}</span>
           </Link>
         </li>
         <li className="navbar__link">
