@@ -55,7 +55,18 @@
         &:hover {
           background-color: darkviolet;
           transform: translateY(-1px);
-          box-shadow: $default-boxshadow
+          box-shadow: $default-boxshadow;
+        }
+
+        &:disabled {
+          background-color: gray;
+          border-color: gray;
+
+          &:hover {
+            box-shadow: none;
+            transform: none;
+            cursor:default;
+          }
         }
       }
 
