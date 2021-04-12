@@ -12,6 +12,16 @@
     margin-bottom: 1rem;
   }
 
+  &>p>a {
+    text-decoration: underline;
+    color: color(blue, 40);
+
+    &:hover,
+    &:focus {
+      color: color(blue, 60);
+    }
+  }
+
   .container {
     display: flex;
   }
