@@ -8,7 +8,7 @@ export const addToCart = (id: string, amount: number) => async (
   getState: GetState
 ) => {
   const { data } = await axios.get<IProduct>(
-    `http://127.0.0.1:4000/api/products/${id}`
+    `http://${process.env.REACT_APP_HOST}:4000/api/products/${id}`
   );
 
   dispatch({
