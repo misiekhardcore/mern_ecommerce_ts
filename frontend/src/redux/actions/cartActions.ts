@@ -13,7 +13,7 @@ export const addToCart = (id: string, amount: number) => async (
 
   dispatch({
     type: actionTypes.ADD_TO_CART,
-    payload: { product: data, amount },
+    payload: { ...data, amount },
   });
 
   localStorage.setItem(
@@ -27,7 +27,7 @@ export const updateCart = (id: string, amount: number) => (
   getState: GetState
 ) => {
   const product = getState().cartReducer.cartItems.find(
-    (x) => x.product._id === id
+    (x) => x._id === id
   );
   if (product)
     dispatch({

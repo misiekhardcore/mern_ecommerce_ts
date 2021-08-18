@@ -12,13 +12,12 @@ interface CartItemProps {
 }
 
 export const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const { product, amount } = item;
-  const { name, imageUrl, _id, countInStock, price } = product;
+  const { name, imageUrl, _id, countInStock, price, amount } = item;
   const [qty, setQty] = useState<number>(item.amount);
   const dispatch = useDispatch();
 
   const removeFromCartHandler = () => {
-    dispatch(removeFromCart(item.product._id));
+    dispatch(removeFromCart(item._id));
   };
 
   const updateItemhandler = (x: number) => {

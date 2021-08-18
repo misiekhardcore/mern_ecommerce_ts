@@ -25,7 +25,7 @@ export const CartPage: React.FC<CartPageProps> = () => {
         <div className="container">
           <div className="cartpage__left">
             {cartItems.map((item) => (
-              <CartItem key={item.product._id} item={item} />
+              <CartItem key={item._id} item={item} />
             ))}
           </div>
           <div className="cartpage__right">

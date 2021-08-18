@@ -2,8 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { IProduct } from "../../types";
 import * as actionTypes from "../constants/cartConstants";
 
-export interface ICartItem {
-  product: IProduct;
+export interface ICartItem extends IProduct {
   amount: number;
 }
 
@@ -22,14 +21,14 @@ export const cartReducer = (
       const product = action.payload;
 
       const existingProduct = state.cartItems.find(
-        (p) => p.product._id === (product as ICartItem).product._id
+        (p) => p._id === (product as ICartItem)._id
       );
 
       if (existingProduct)
         return {
           ...state,
           cartItems: state.cartItems.map((p: ICartItem) =>
-            p.product._id === existingProduct.product._id
+            p._id === existingProduct._id
               ? {
                   ...(product as ICartItem),
                   amount: p.amount + (product as ICartItem).amount,
@@ -46,7 +45,7 @@ export const cartReducer = (
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          (p: ICartItem) => p.product._id !== action.payload
+          (p: ICartItem) => p._id !== action.payload
         ),
       };
     case actionTypes.UPDATE_CART:
@@ -54,7 +53,7 @@ export const cartReducer = (
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
-          item.product._id === product1.product._id
+          item._id === product1._id
             ? { ...item, amount: product1.amount }
             : item
         ),
